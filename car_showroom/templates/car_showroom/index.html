@@ -1,0 +1,18 @@
+<h2>Hello, world. You're at the best car showroom ever. Congrats!</h2>
+<h3>Description</h3>
+<h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Sed feugiat risus quis ex mattis, in sagittis augue ullamcorper.
+    Nam tincidunt feugiat tempor. Mauris imperdiet orci quam, vitae mattis arcu aliquam in.
+    Duis quis varius orci, in ornare lorem. Morbi laoreet lacus sit amet nisi tristique
+    imperdiet. Pellentesque pharetra sem nunc, vel luctus erat feugiat eu.
+    Nullam congue purus ut orci rhoncus, at faucibus tortor pellentesque.
+    Aliquam placerat eget eros eu luctus. Morbi at massa id dolor iaculis molestie.
+    Donec pulvinar mauris purus, sit amet euismod dolor maximus vel.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
+<img src="https://dailym.ai/2Led0St" />
+
+{% if last_vehiclepart %}
+    <p>Amount of the vehicle parts available now: <b>{{ last_vehiclepart.id }}</b></p>
+{% else %}
+    <p>No vehicle parts are available.</p>
+{% endif %}
