@@ -17,7 +17,7 @@ def sections(request):
 
 def section(request, section_name):
     vehiclepart_list = VehiclePart.objects.order_by('-name')
-    template = loader.get_template('car_showroom/section_name.html')
+    template = loader.get_template('car_showroom/<section_name>/')
     context = {
         'vehiclepart_list': vehiclepart_list,
     }
