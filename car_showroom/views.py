@@ -1,23 +1,30 @@
 from django.shortcuts import render
+from django.template import loader
 from django.http import HttpResponse
-from .models import VehiclePart
+
+from .models import VehiclePart, Section
 
 
 def index(request):
-    last_vehiclepart = VehiclePart.objects.order_by('-id')[0]
     return render(request, 'car_showroom/index.html', {
-        'last_vehiclepart': last_vehiclepart,
+        'amount_vehiclepart': VehiclePart.objects.all().count(),
     })
 
-def vehiclepart(request, vehiclepart_id):
-    return HttpResponse("You're looking at vehicle part # %s." % vehiclepart_id)
+def sections(request):
+    return render(request, 'car_showroom/sections.html', {
+        'section_list': Section.objects.all(),
+    })
 
-def section(request, section_id):
-    response = "You're looking at the section # %s."
-    return HttpResponse(response % section_id)
+def section(request, section_name):
+    vehiclepart_list = VehiclePart.objects.order_by('-name')
+    template = loader.get_template('car_showroom/section_name.html')
+    context = {
+        'vehiclepart_list': vehiclepart_list,
+    }
+    return HttpResponse(template.render(context, request))
 
 def top_priced(request):
     priciest_vehiclepart_list = VehiclePart.objects.order_by('-price')[:5]
-    output = "<br>".join([f"{v.id}. Name: {v.name},  price: {v.price}"
-        for v in priciest_vehiclepart_list])
-    return HttpResponse(output)
+    return render(request, 'car_showroom/top-priced.html', {
+        'priciest_vehiclepart_list': priciest_vehiclepart_list,
+    })
